@@ -1,65 +1,60 @@
 import os
-import torch
+import cv2
+import pandas as pd
+import numpy as np
 
-from torchvision.io import read_image
-from torchvision.ops.boxes import masks_to_boxes
-from torchvision import tv_tensors
-from torchvision.transforms.v2 import functional as F
-
-def sum2(x,y):
-    s = x+y
-    return s
-class PennFudanDataset(torch.utils.data.Dataset):
-    def __init__(self, root, transforms):
-        self.root = root
-        self.transforms = transforms
-        # load all image files, sorting them to
-        # ensure that they are aligned
-        self.imgs = list(sorted(os.listdir(os.path.join(root, "PNGImages"))))
-        self.masks = list(sorted(os.listdir(os.path.join(root, "PedMasks"))))
-
-    def __getitem__(self, idx):
-        # load images and masks
-        img_path = os.path.join(self.root, "PNGImages", self.imgs[idx])
-        mask_path = os.path.join(self.root, "PedMasks", self.masks[idx])
-        img = read_image(img_path)
-        mask = read_image(mask_path)
-        # instances are encoded as different colors
-        obj_ids = torch.unique(mask)
-        # first id is the background, so remove it
-        obj_ids = obj_ids[1:]
-        num_objs = len(obj_ids)
-
-        # split the color-encoded mask into a set
-        # of binary masks
-        masks = (mask == obj_ids[:, None, None]).to(dtype=torch.uint8)
-
-        # get bounding box coordinates for each mask
-        boxes = masks_to_boxes(masks)
-
-        # there is only one class
-        labels = torch.ones((num_objs,), dtype=torch.int64)
-
-        image_id = idx
-        area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
-        # suppose all instances are not crowd
-        iscrowd = torch.zeros((num_objs,), dtype=torch.int64)
-
-        # Wrap sample and targets into torchvision tv_tensors:
-        img = tv_tensors.Image(img)
-
-        target = {}
-        target["boxes"] = tv_tensors.BoundingBoxes(boxes, format="XYXY", canvas_size=F.get_size(img))
-        target["masks"] = tv_tensors.Mask(masks)
-        target["labels"] = labels
-        target["image_id"] = image_id
-        target["area"] = area
-        target["iscrowd"] = iscrowd
-
-        if self.transforms is not None:
-            img, target = self.transforms(img, target)
-
-        return img, target
-
-    def __len__(self):
-        return len(self.imgs)
+def upload_image():
+    uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+    if uploaded_file is not None:
+        image = Image.open(uploaded_file)
+        return image
+    return None
+    
+def check_image_quality(image):
+    quality_score = image_quality_model.predict(image)
+    if quality_score < 0.75:
+        retake = st.button("Retake Picture")
+        if retake:
+            return upload_image()
+        else:
+            st.button("Continue Anyway")
+    return image
+    
+def classify_cancer(image):
+    cancer_prob = cancer_binary_model.predict(image)
+    if cancer_prob > 0.75:
+        cancer_type = cancer_multiclass_model.predict(image)
+        return cancer_prob, cancer_type
+    return cancer_prob, None
+    
+def classify_skin(image):
+    skin_diseases = skin_disease_model.predict(image, threshold=0.2)
+    oily_dry = oily_dry_model.predict(image)
+    skin_type = skin_type_model.predict(image)
+    return skin_diseases, oily_dry, skin_type
+    
+def interpret_results(cancer_prob, cancer_type, skin_diseases, oily_dry, skin_type):
+    interpretation = f"Cancer probability: {cancer_prob}\n"
+    if cancer_type:
+        interpretation += f"Predicted cancer type: {cancer_type}\n"
+        interpretation += "Please follow up with a doctor for further evaluation.\n"
+    interpretation += f"Skin diseases detected: {', '.join(skin_diseases)}\n"
+    interpretation += f"Skin type: {oily_dry}, {skin_type}"
+    return interpretation
+    
+def display_results(interpretation):
+    st.subheader("Results")
+    st.write(interpretation)
+    
+def handle_followup():
+    question = st.text_input("Ask a follow-up question")
+    if question:
+        response = conversation.predict(input=question)
+        st.write(response)
+        
+def store_results(cancer_prob, cancer_type, skin_diseases, oily_dry, skin_type):
+    # Store the results in a database or file
+    # You can use libraries like pandas, SQLAlchemy, or CSV for this purpose
+    pass
+    
+ 
