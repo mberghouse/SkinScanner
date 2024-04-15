@@ -1,0 +1,43 @@
+Related column family,Labeling Question Type,Question,Comments
+dermatologist_gradable_for_skin_condition,RADIO,"Is quality of the images sufficient for you to provide a diagnosis for this case? (Images may not be perfect and you may not have all the clinical data you would normally have in clinic, but if you were provided this information via a teleconsult, would you be able to provide an answer?)
+Answer options:
+Yes, the quality is sufficient for me or another colleague to make a diagnosis.
+No, the quality is insufficient for me or another colleague to make a diagnosis.
+The quality is sufficient, and NO DISCERNIBLE PATHOLOGY can be identified (image(s) look normal).",
+,RADIO,"Are you able to answer this question even if you see multiple conditions in the case? (If you see more than one condition, but you can still determine what is the condition or disease of interest, you should answer 'Yes')
+Answer options:
+No, I see multiple conditions and cannot tell which is the condition of interest.
+Yes, I see multiple conditions but I can still determine which is the condition of interest OR there is clearly one condition of interest.","As of initial release, these question answers are not included in the data. For that reason, you may sometimes see entries where the image quality is sufficient but no condition label is provided."
+dermatologist_skin_condition_label,REPEATABLE,Please provide your top three differential diagnoses.,
+dermatologist_skin_condition_label,AUTOCOMPLETE,"Please provide up to 3 diagnoses for this case, listing the diagnosis that you are the most confident in first.",
+dermatologist_skin_condition_label,TEXT,"If the condition is not in the menu, please select N/A above and specify the condition below:",
+dermatologist_skin_condition_confidence,RADIO,"Please indicate how confident you are in this top diagnosis
+Answer options:
+Greater than 90% - These images are classic for this condition.
+Between 75%-90% - These images are NOT classic for this condition, but I am very confident this is the diagnosis and colleagues would likely agree with me.
+Between 50%-75% - I am fairly confident this is the diagnosis, but up to half of my colleagues may disagree with me.
+Between 25%-50% - This is a difficult case. I am conflicted between 2 or more diagnoses so I am not confident in my answer. I would not be surprised if half of my colleagues disagreed with me.
+Less than 25% - I am just providing my best guess.",These confidence values correspond to the 1-5 values present in dermatologist_skin_condition_confidence. 5 corresponds to the highest confidence (>90%)
+dermatologist_gradable_for_fitzpatrick_skin_type,BOOLEAN,Are these gradable for skin type?,
+dermatologist_fitzpatrick_skin_type_label,RADIO,"What skin type does this person have?
+Answer options:
+Fitzpatrick type 1
+Fitzpatrick type 2
+Fitzpatrick type 3
+Fitzpatrick type 4
+Fitzpatrick type 5
+Fitzpatrick type 6",
+monk_skin_tone_label,RADIO,"Which of the 10 skin tone categories best matches the skin tone of this individual?
+Answer options:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10",
+,BOOLEAN,It was difficult to assess the skintone of this person.,
+gradable_for_monk_skin_tone,BOOLEAN,I could not rate due to multiple people in the image(s) and/or the color of the image(s),

@@ -1,0 +1,99 @@
+Column Name,Question Content,Comments
+age_bucket,"Age
+Small text: Age influences risk of certain diseases
+Users could enter an age 18-150",
+sex_at_birth,"Sex at birth
+Small text: Risk of diseases vary according to sex
+Dropdown menu options:
+Female
+Male
+Intersex / Non-binary
+Prefer not to say",
+skin_type,"How does your skin react to sun exposure?
+Small text: Some skin types are more prone to skin diseases
+Dropdown menu options:
+Always burns, never tans
+Usually burns, lightly tans
+Sometimes burns, evenly tans
+Rarely burns, tans well
+Very rarely burns, easily tans
+Never burns, always tans
+None of the above",
+race_ethnicity*,"With which racial or ethnic groups do you identify? Mark all boxes that apply
+Checkboxes available:
+American Indian or Alaska Native
+Asian
+Black or African American
+Hispanic, Latino, or Spanish Origin
+Middle Eastern or North African
+Native Hawaiian or Pacific Islander
+White
+Another race or ethnicity not listed
+Prefer not to answer",
+textures*,"Describe how the affected skin area feels
+Small text: Select all that apply
+Checkboxes available:
+Raised or bumpy
+Flat
+Rough or flaky
+Filled with fluid",
+body_parts*,"Where on your body is the issue?
+Select all that apply
+Head / Neck
+Arm
+Palm of hand
+Back of hand
+Front torso
+Back torso
+Genitalia / Groin
+Buttocks
+Leg
+Top / side of foot
+Sole of foot
+Other",
+condition_symptoms*,"Are you experiencing any of the following with your skin issue?
+Small text: Select all that apply
+Checkboxes available:
+Concerning in appearance
+Bleeding
+Increasing in size
+Darkening
+Itching
+Burning
+Pain
+None of the above",
+other_symptoms*,"Do you have any of these symptoms?
+Small text: Select all that apply
+Fever
+Chills
+Fatigue
+Joint pain
+Mouth sores
+Shortness of breath
+None of the above",
+related_category,"Which most closely describes your skin issue?
+Options available:
+Acne
+Growth or mole
+Hair loss
+Other hair issue
+Nail issue
+Birthmark or skin pigment issue
+Rash
+Normal / healthy
+None of the above",
+condition_duration,"For how long have you had this skin issue?
+Options available:
+1 day
+Less than 1 week
+1-4 weeks
+1-3 months
+3-12 months
+More than 1 year
+More than 5 years
+Since childhood
+None of the above",
+image_\d_shot_type,"Take 3 photos of your skin
+1. Close up
+2. At an angle (Optional)
+3. At a distance (Optional)",
