@@ -13,7 +13,7 @@ from utils import (
 )
 
 # Initialize OpenAI client
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+client = OpenAI()
 
 def capture_from_webcam():
     img_file_buffer = st.camera_input("Take a picture")
@@ -64,7 +64,7 @@ def main():
             
             with st.chat_message("assistant"):
                 stream = client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="o3-mini",
                     messages=[
                         {"role": "system", "content": "You are a helpful dermatology assistant. Use the provided context to answer questions about the skin analysis results."},
                         *[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
