@@ -1,2 +1,6 @@
 pytorch
-sci-kit learn
+scikit-learn
+openai
+streamlit
+opencv-python
+pillow
